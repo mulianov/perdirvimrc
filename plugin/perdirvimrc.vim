@@ -39,17 +39,8 @@ if exists("perdirvimrc_loaded")
 endif
 let perdirvimrc_loaded = 1
 
-if (has("win32") || has("gui_win32") || has("gui_win32s") || has("win16") || has("win64") || has("win32unix") || has("win95")) && &shell != "bash"
-	" windows
-	let s:dir_separator = '\'
-	let s:vimrc = ['_vimrc', '_vim', '.vim', '.vimrc']
-	let s:unix = 0
-else
-	" unix
-	let s:dir_separator = '/'
-	let s:vimrc = ['.vim', '.vimrc', '_vimrc', '_vim']
-	let s:unix = 1
-endif
+let s:dir_separator = '/'
+let s:vimrc = ['_vimrc']
 
 function! LoadVimRes(path)
 	let s:dirlist = split(a:path, s:dir_separator) 
@@ -62,8 +53,7 @@ function! LoadVimRes(path)
 	  while s:k < len(s:vimrc)
 		" load s:vimrc1
 		let s:filename = join(s:subdir, s:dir_separator).s:dir_separator.s:vimrc[s:k]
-		if s:unix == 1
-			let s:filename = s:dir_separator . s:filename
+		let s:filename = s:dir_separator . s:filename
 		endif
 		if filereadable(s:filename) != 0
 		   exe 'source '.s:filename
