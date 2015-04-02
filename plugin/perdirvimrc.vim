@@ -54,7 +54,6 @@ function! LoadVimRes(path)
 		" load s:vimrc1
 		let s:filename = join(s:subdir, s:dir_separator).s:dir_separator.s:vimrc[s:k]
 		let s:filename = s:dir_separator . s:filename
-		endif
 		if filereadable(s:filename) != 0
 		   exe 'source '.s:filename
 		endif
